@@ -1,0 +1,7 @@
+SELECT Customercity,
+   	CustomerName,
+   	OrderAmount,
+   	ROW_NUMBER() OVER(PARTITION BY Customercity
+   	ORDER BY OrderAmount DESC) AS "Row Number",
+   	CONVERT(VARCHAR(20), SUM(orderamount) OVER(PARTITION BY Customercity
+   	ORDER BY OrderAmount DESC ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING), 1) AS CumulativeTotal,
